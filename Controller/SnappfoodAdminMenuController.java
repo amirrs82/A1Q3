@@ -5,6 +5,7 @@ import Model.Restaurant;
 import Model.Snappfood;
 import Model.Users.Customer;
 import Model.Users.RestaurantAdmin;
+import Model.Users.SnappfoodAdmin;
 import Model.Users.User;
 import View.Enums.Messages.SnappfoodAdminMenuMessages;
 
@@ -26,6 +27,11 @@ public class SnappfoodAdminMenuController {
         else return SnappfoodAdminMenuMessages.USERNAME_EXIST;
     }
 
+    public static String showRestaurants(String type) {
+        SnappfoodAdmin snappfoodAdmin = (SnappfoodAdmin) Snappfood.getCurrentUser();
+        return Controller.showRestaurants(type, snappfoodAdmin);
+    }
+
     public static SnappfoodAdminMenuMessages checkRemoveRestaurant(String name) {
         Restaurant restaurant = Snappfood.getRestaurantByName(name);
         if (restaurant != null) {
@@ -45,5 +51,10 @@ public class SnappfoodAdminMenuController {
                 } else return SnappfoodAdminMenuMessages.INVALID_CODE_FORMAT;
             else return SnappfoodAdminMenuMessages.INVALID_AMOUNT;
         else return SnappfoodAdminMenuMessages.USERNAME_NOT_EXIST;
+    }
+
+    public static String showDiscounts() {
+        SnappfoodAdmin snappfoodAdmin = (SnappfoodAdmin) Snappfood.getCurrentUser();
+        return Controller.showDiscounts(snappfoodAdmin);
     }
 }

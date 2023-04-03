@@ -4,24 +4,18 @@ import Model.Food;
 import Model.Restaurant;
 import Model.Snappfood;
 import Model.Users.RestaurantAdmin;
-import Model.Users.User;
 import View.Enums.Messages.RestaurantAdminMenuMessages;
 
 public class RestaurantAdminMenuController {
     public static RestaurantAdminMenuMessages checkChargeAccount(int amount) {
         if (amount > 0) {
-            User currentUser = Snappfood.getCurrentUser();
-            int currentBalance = currentUser.getBalance();
-            currentUser.setBalance(currentBalance + amount);
+            RestaurantAdmin restaurantAdmin = (RestaurantAdmin) Snappfood.getCurrentUser();
+            int currentBalance = restaurantAdmin.getBalance();
+            restaurantAdmin.setBalance(currentBalance + amount);
             return RestaurantAdminMenuMessages.SUCCESS;
         } else return RestaurantAdminMenuMessages.INVALID_AMOUNT;
     }
-    //TODO: the method should be created only once
-
-    public static int getBalance() {
-        return Snappfood.getCurrentUser().getBalance();
-    }
-    //TODO: the method should be created only once
+    //TODO: Duplicated code
 
     public static RestaurantAdminMenuMessages checkAddFood(String name, String category, int price, int cost) {
         RestaurantAdmin currentUser = (RestaurantAdmin) Snappfood.getCurrentUser();

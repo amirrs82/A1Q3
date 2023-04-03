@@ -8,7 +8,6 @@ public class Restaurant {
     private final ArrayList<Food> foods = new ArrayList<>();
     private final String name;
     private final String type;
-    private String password;
     private final RestaurantAdmin owner;
 
     public boolean foodExist(String name) {
@@ -35,14 +34,6 @@ public class Restaurant {
         return name;
     }
 
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
     public String getType() {
         return type;
     }
@@ -51,12 +42,12 @@ public class Restaurant {
         return owner;
     }
 
-    public String printFoods(String category) {
-        StringBuilder output = new StringBuilder();
-        for (Food food : foods)
-            if (food.getCategory().equals(category))
-                output.append(food.getName()).append(" | ").append("price=").append(food.getPrice()).append("\n");
-        return output.toString();
+    public ArrayList<Food> getFoods() {
+        return foods;
+    }
+
+    public String printFoods(Food food) {
+        return food.getName() + " | price=" + food.getPrice()+"\n";
     }
 
     public Restaurant(String name, String type, RestaurantAdmin owner) {

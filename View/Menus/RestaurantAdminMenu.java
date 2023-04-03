@@ -1,5 +1,6 @@
 package View.Menus;
 
+import Controller.Controller;
 import Controller.RestaurantAdminMenuController;
 import View.Enums.Commands.RestaurantAdminMenuCommands;
 import View.Enums.Messages.RestaurantAdminMenuMessages;
@@ -40,9 +41,10 @@ public class RestaurantAdminMenu {
                 break;
         }
     }
+
     //TODO:Duplicated code
     private void showBalance() {
-        int balance = RestaurantAdminMenuController.getBalance();
+        int balance = Controller.getBalance();
         System.out.println(balance);
     }
 

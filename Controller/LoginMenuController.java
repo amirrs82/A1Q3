@@ -4,10 +4,16 @@ package Controller;
 import Model.Snappfood;
 import Model.Users.Customer;
 import Model.Users.RestaurantAdmin;
+import Model.Users.SnappfoodAdmin;
 import Model.Users.User;
 import View.Enums.Messages.LoginMenuMessages;
 
 public class LoginMenuController {
+    public static void createSnappfoodAdmin(String username, String password) {
+        SnappfoodAdmin snappfoodAdmin = SnappfoodAdmin.getInstance(username, password);
+        Snappfood.addUser(snappfoodAdmin);
+    }
+
     public static LoginMenuMessages checkRegister(String username, String password) {
         User user = Snappfood.getUserByUsername(username);
         if (Controller.isValidUsernameFormat(username))

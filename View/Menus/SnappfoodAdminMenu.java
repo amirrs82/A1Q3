@@ -1,10 +1,6 @@
 package View.Menus;
 
 import Controller.SnappfoodAdminMenuController;
-import Model.Discount;
-import Model.Restaurant;
-import Model.Snappfood;
-import Model.Users.SnappfoodAdmin;
 import View.Enums.Commands.SnappfoodAdminMenuCommands;
 import View.Enums.Messages.SnappfoodAdminMenuMessages;
 
@@ -12,7 +8,6 @@ import java.util.Scanner;
 import java.util.regex.Matcher;
 
 public class SnappfoodAdminMenu {
-    private final SnappfoodAdmin snappfoodAdmin = (SnappfoodAdmin) Snappfood.getCurrentUser();
 
     public boolean run(Scanner scanner) {
         String command;
@@ -65,14 +60,9 @@ public class SnappfoodAdminMenu {
 
     private void showRestaurants(Matcher matcher) {
         String type = matcher.group("type");
-        int i = 1;
-        if (type == null) for (Restaurant restaurant : Snappfood.getRestaurants())
-            System.out.println((i++)+snappfoodAdmin.printRestaurants(restaurant));
-        else for (Restaurant restaurant : Snappfood.getRestaurants())
-            if (restaurant.getType().equals(type)) System.out.println((i++)+snappfoodAdmin.printRestaurants(restaurant));
+        System.out.print(SnappfoodAdminMenuController.showRestaurants(type));
     }
 
-    //TODO:Duplicated code
     private void checkRemoveRestaurant(Matcher matcher) {
         String name = matcher.group("name");
         SnappfoodAdminMenuMessages message = SnappfoodAdminMenuController.checkRemoveRestaurant(name);
@@ -102,8 +92,6 @@ public class SnappfoodAdminMenu {
     }
 
     private void showDiscounts() {
-        int i = 1;
-        for (Discount discount : Snappfood.getDiscounts())
-            System.out.println((i++) + snappfoodAdmin.printDiscount(discount));
+        System.out.print(SnappfoodAdminMenuController.showDiscounts());
     }
 }

@@ -1,10 +1,7 @@
 package View.Menus;
 
+import Controller.Controller;
 import Controller.CustomerMenuController;
-import Model.Discount;
-import Model.Restaurant;
-import Model.Snappfood;
-import Model.Users.Customer;
 import View.Enums.Commands.CustomerMenuCommands;
 import View.Enums.Messages.CustomerMenuMessages;
 
@@ -12,8 +9,6 @@ import java.util.Scanner;
 import java.util.regex.Matcher;
 
 public class CustomerMenu {
-    private final Customer customer = (Customer) Snappfood.getCurrentUser();
-
     public boolean run(Scanner scanner) {
         String command;
         Matcher matcher;
@@ -56,24 +51,17 @@ public class CustomerMenu {
                 break;
         }
     }
-
     //TODO:Duplicated code
 
     private void showBalance() {
-        int balance = CustomerMenuController.getBalance();
+        int balance = Controller.getBalance();
         System.out.println(balance);
     }
 
     private void showRestaurants(Matcher matcher) {
         String type = matcher.group("type");
-        int i = 1;
-        if (type == null) for (Restaurant restaurant : Snappfood.getRestaurants())
-            System.out.println((i++) + customer.printRestaurants(restaurant));
-        else for (Restaurant restaurant : Snappfood.getRestaurants())
-            if (restaurant.getType().equals(type)) System.out.println((i++) + customer.printRestaurants(restaurant));
+        System.out.print(CustomerMenuController.showRestaurants(type));
     }
-
-    //TODO:Duplicated code and use model in view
 
     private void showMenu(Matcher matcher) {
         String restaurantName = matcher.group("restaurantName");
@@ -87,30 +75,8 @@ public class CustomerMenu {
                 System.out.println("show menu failed: invalid category");
                 break;
             case SUCCESS:
-                showMenu(restaurantName, category);
+                System.out.print(CustomerMenuController.showMenu(restaurantName, category));
                 break;
-        }
-    }
-
-    private void showMenu(String restaurantName, String category) {
-        Restaurant restaurant = Snappfood.getRestaurantByName(restaurantName);
-        String output;
-        if (category == null) {
-            output = restaurant.printFoods("starter");
-            System.out.println("<< STARTER >>");
-            if (!output.isEmpty()) System.out.print(output);
-
-            output = restaurant.printFoods("entree");
-            System.out.println("<< ENTREE >>");
-            if (!output.isEmpty()) System.out.print(output);
-
-            output = restaurant.printFoods("dessert");
-            System.out.println("<< DESSERT >>");
-            if (!output.isEmpty()) System.out.print(output);
-        } else {
-            output = restaurant.printFoods(category);
-            if (!output.isEmpty())
-                System.out.print(output);
         }
     }
 
@@ -166,13 +132,11 @@ public class CustomerMenu {
     }
 
     private void showCart() {
-        System.out.println(customer.printCart());
+        System.out.println(CustomerMenuController.showCart());
     }
 
     private void showDiscounts() {
-        int i = 1;
-        for (Discount discount : customer.getDiscounts())
-            System.out.println((i++) + customer.printDiscount(discount));
+        System.out.print(CustomerMenuController.showDiscounts());
     }
 
     private void checkPurchaseCart(Matcher matcher) {

@@ -1,8 +1,6 @@
 package View.Menus;
 
 import Controller.LoginMenuController;
-import Model.Snappfood;
-import Model.Users.SnappfoodAdmin;
 import View.Enums.Commands.LoginMenuCommands;
 import View.Enums.Messages.LoginMenuMessages;
 
@@ -16,8 +14,8 @@ public class LoginMenu {
         Matcher matcher;
         String snappfoodAdminUsername = scanner.nextLine().trim();
         String snappfoodAdminPassword = scanner.nextLine().trim();
-        SnappfoodAdmin snappfoodAdmin = SnappfoodAdmin.getInstance(snappfoodAdminUsername, snappfoodAdminPassword);
-        Snappfood.addUser(snappfoodAdmin);
+        LoginMenuController.createSnappfoodAdmin(snappfoodAdminUsername, snappfoodAdminPassword);
+
         while (true) {
             command = scanner.nextLine().trim();
             if (command.equals("exit")) break;

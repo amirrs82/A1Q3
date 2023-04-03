@@ -19,12 +19,12 @@ public class SnappfoodAdmin extends User {
     @Override
     public String printDiscount(Discount discount) {
         return ") " + discount.getCode() + " | " + "amount=" + discount.getAmount() +
-                " --> user=" + discount.getOwner().getUsername();
+                " --> user=" + discount.getOwner().getUsername() + "\n";
     }
 
     @Override
     public String printRestaurants(Restaurant restaurant) {
         return ") " + restaurant.getName() + ": type=" + restaurant.getType()
-                + " balance=" + restaurant.getOwner().getBalance();
+                + " balance=" + restaurant.getOwner().getBalance() + "\n";
     }
 }

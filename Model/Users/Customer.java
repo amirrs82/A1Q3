@@ -33,8 +33,7 @@ public class Customer extends User {
 
     public Discount getDiscount(String code) {
         for (Discount discount : discounts)
-            if (discount.getCode().equals(code))
-                return discount;
+            if (discount.getCode().equals(code)) return discount;
         return null;
     }
 
@@ -55,25 +54,17 @@ public class Customer extends User {
 
     @Override
     public String printDiscount(Discount discount) {
-        return ") " + discount.getCode() + " | " + "amount=" + discount.getAmount();
+        return ") " + discount.getCode() + " | " + "amount=" + discount.getAmount() + "\n";
     }
 
     @Override
     public String printRestaurants(Restaurant restaurant) {
-        return ") " + restaurant.getName() + ": type=" + restaurant.getType();
+        return ") " + restaurant.getName() + ": type=" + restaurant.getType() + "\n";
     }
 
-    public String printCart() {
-        String output = "";
-        int i = 1;
-        int totalPrice = 0;
-        for (Food food : cart.keySet()) {
-            output += (i++) + ") " + food.getName() + " | restaurant=" + food.getRestaurantName()
-                    + " price=" + food.getPrice() * cart.get(food) + "\n";
-            totalPrice += food.getPrice() * cart.get(food);
-        }
-        output += "Total: " + totalPrice;
-        return output;
+    public String printCart(Food food) {
+        return ") " + food.getName() + " | restaurant=" + food.getRestaurantName() +
+                " price=" + food.getPrice() * cart.get(food) + "\n";
     }
 
     public Customer(String username, String password) {

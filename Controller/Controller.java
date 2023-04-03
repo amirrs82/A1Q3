@@ -1,5 +1,8 @@
 package Controller;
 
+import Model.Discount;
+import Model.Restaurant;
+import Model.Snappfood;
 import Model.Users.Customer;
 import Model.Users.RestaurantAdmin;
 import Model.Users.SnappfoodAdmin;
@@ -43,5 +46,28 @@ public class Controller {
 
     static boolean isValidFoodName(String name) {
         return name.matches("[a-z-]+");
+    }
+
+    public static int getBalance() {
+        return Snappfood.getCurrentUser().getBalance();
+    }
+
+    public static String showRestaurants(String type, User user) {
+        StringBuilder restaurantOutput = new StringBuilder();
+        int i = 1;
+        if (type == null) for (Restaurant restaurant : Snappfood.getRestaurants())
+            restaurantOutput.append(i++).append(user.printRestaurants(restaurant));
+        else for (Restaurant restaurant : Snappfood.getRestaurants())
+            if (restaurant.getType().equals(type))
+                restaurantOutput.append(i++).append(user.printRestaurants(restaurant));
+        return restaurantOutput.toString();
+    }
+
+    public static String showDiscounts(User user) {
+        StringBuilder discountOutput = new StringBuilder();
+        int i = 1;
+        for (Discount discount : Snappfood.getDiscounts())
+            discountOutput.append(i++).append(user.printDiscount(discount));
+        return discountOutput.toString();
     }
 }

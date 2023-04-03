@@ -1,0 +1,14 @@
+package View.Enums.Messages;
+
+public enum SnappfoodAdminMenuMessages {
+
+    INVALID_USERNAME_FORMAT,
+    USERNAME_EXIST,
+    USERNAME_NOT_EXIST,
+    INVALID_PASSWORD_FORMAT,
+    WEAK_PASSWORD,
+    INVALID_TYPE_FORMAT,
+    INVALID_CODE_FORMAT,
+    INVALID_AMOUNT,
+    SUCCESS,
+}
